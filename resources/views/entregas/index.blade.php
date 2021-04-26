@@ -1,6 +1,8 @@
 @extends('layouts.app')
 @section('content')
-	<div class="container">
+
+<entregas-component></entregas-component>
+	{{-- <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-12">
             <div class="card">
@@ -48,7 +50,12 @@
 					      </td>
 					    </tr>
 					    @empty
-		                	<li>No hay proyectos para mostrar</li>
+					    	<tr>
+
+					    			<li>No hay Ordenes para mostrar</li>
+					    		</td>
+					    	</tr>
+
 		                @endforelse
 					  </tbody>
 					</table>
@@ -56,5 +63,5 @@
             </div>
         </div>
     </div>
-</div>
+</div> --}}
 @endsection

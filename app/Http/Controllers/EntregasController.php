@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Repositories\BaseData;
 use App\Entrega;
 use Auth;
+use Illuminate\Support\Arr;
 class EntregasController extends Controller
 {
     /**
@@ -29,9 +30,11 @@ class EntregasController extends Controller
              array_push($ordenes1, $key->id_pedido);
         }
         $woocommerce= $this->baseData->Conexion();
-        $orders1 = $woocommerce->get('orders', $parameters= ['status' => 'processing,completed']);
+        $orders1 = $woocommerce->get('orders', $parameters= ['status' => 'processing,completed', 'per_page' => 99]);
         $orders = collect($orders1)->whereIn('id', $ordenes1)->all();
-        return view('entregas.index', compact('orders'));
+
+
+        return $orders;
     }
 
     /**
@@ -86,7 +89,17 @@ class EntregasController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+         $woocommerce= $this->baseData->Conexion();
+         $data = [
+            'status' => 'completed'
+        ];
+         if($woocommerce->put('orders/'.$id, $data)){
+            return true;
+         }else
+         {
+            return false;
+         }
+
     }
 
     /**
